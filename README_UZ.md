@@ -56,5 +56,5 @@ Repimiz quyidagi kategoriyalarga bo'lingan:
 
 1. Ushbu repozitoriyani klonlang:
    ```bash
-   git clone https://github.com/yourusername/LeetCode-Database-Problems.git
+   git clone https://github.com/baxt1or/LeetCode-Database-Problems.git
    ```

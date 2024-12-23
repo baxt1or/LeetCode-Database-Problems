@@ -56,5 +56,5 @@
 
 1. Клонируйте этот репозиторий:
    ```bash
-   git clone https://github.com/yourusername/LeetCode-Database-Problems.git
+   git clone https://github.com/baxt1or/LeetCode-Database-Problems.git
    ```
