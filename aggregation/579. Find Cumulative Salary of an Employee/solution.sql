@@ -1,0 +1,11 @@
+WITH cte AS (SELECT
+*,
+SUM(salary) OVER(PARTITION BY id ORDER BY month RANGE BETWEEN 2 PRECEDING AND CURRENT ROW) AS dd,
+ROW_NUMBER() OVER(PARTITION BY id ORDER BY month DESC) AS rn
+FROM employee)
+
+SELECT
+id, month, dd AS salary
+FROM cte
+WHERE rn != 1
+ORDER BY id, month DESC
