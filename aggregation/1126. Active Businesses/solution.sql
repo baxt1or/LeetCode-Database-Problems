@@ -1,22 +1,10 @@
 -- Write your PostgreSQL query statement below
-WITH cte AS (SELECT
-event_type,
-AVG(occurrences) AS avg_total
-FROM events
-GROUP BY 1),
-
-cte2 AS (SELECT
-business_id, 
-event_type, 
-SUM(occurrences) AS total
-FROM events
-GROUP BY 1, 2)
-
-
 SELECT
-a.business_id
-FROM cte2 a
-INNER JOIN cte b ON a.event_type = b.event_type
-WHERE a.total > b.avg_total
-GROUP BY 1
-HAVING COUNT(*) >= 2
+business_id
+FROM (SELECT
+business_id, 
+CASE WHEN occurrences > AVG(occurrences) OVER(PARTITION BY event_type) THEN 1 ELSE 0 END AS status
+FROM events) AS sub
+WHERE status = 1
+GROUP BY business_id, status
+HAVING COUNT(*) > 1
