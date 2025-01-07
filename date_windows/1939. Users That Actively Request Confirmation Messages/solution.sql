@@ -1,0 +1,8 @@
+SELECT
+DISTINCT user_id
+FROM (SELECT
+*,
+COUNT(action) 
+OVER(PARTITION BY user_id ORDER BY time_stamp RANGE BETWEEN INTERVAL '24 hours' PRECEDING AND CURRENT ROW ) AS cont 
+FROM confirmations) AS sub
+WHERE cont >= 2
